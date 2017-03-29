@@ -12,9 +12,9 @@ def typing_kit(file_name) :
     templates of the overall NIR spectrum. To save the plot, hit 's'.
     '''
 
-    ##========
+    ##=========
     ## Import Section
-    ##========
+    ##=========
 
     import numpy as np
     import matplotlib.pyplot as plt

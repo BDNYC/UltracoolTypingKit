@@ -11,11 +11,19 @@ def typing_kit(file_name) :
     number, '0' - '8'. Cruz et al. 2017 templates are shown band-by-band followed by Kirkpatrick 2010
     templates of the overall NIR spectrum. To save the plot, hit 's'.
     '''
-    
+
+    ##=========
+    ## Import Section
+    ##=========
+
     import numpy as np
     import matplotlib.pyplot as plt
     from astropy.io import fits
     from astropy.io import ascii
+
+    ##========
+    ## Creating arrays
+    ##========
 
     hdulist = fits.open(file_name)
     spectrum = hdulist[0]

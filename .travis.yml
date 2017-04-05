@@ -11,4 +11,5 @@ script:
 
 matrix:
   allow_failures:
-    - python: 3.3.0 2.7.0
+    - python: 3.3.0 
+      python: 2.7.0

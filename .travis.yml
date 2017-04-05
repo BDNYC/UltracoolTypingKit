@@ -1,8 +1,11 @@
 language: python
 
 python:
-- 3.3.0
 - 3.6.0
 
 script:
 - pytest
+
+matrix:
+  allow_failures:
+    - python: 3.3.0 2.7.0

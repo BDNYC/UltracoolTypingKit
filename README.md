@@ -8,7 +8,7 @@ Home for qualitative spectral typing GUI that follows the Cruz Method
 These original pictures are for before and after versions of plot cleanup.
 
 #### The Initial Grid of Spectral Types
- ![Image of Opening Grid] (https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png?raw=true)
+ ![Image of Opening Grid] (https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png)
 
 Select the spectral type you think is best by pressing the corresponding number on your keyboard.
 

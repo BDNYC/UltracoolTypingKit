@@ -8,10 +8,10 @@ class Data:
 
     def __init__(self, file_name):
 
-    	'''
-    	This function splits the data into J-H-K bands and normalizes each band by its average.
-    	It also normalizes a separate copy of the overall spectra to Kirkpatrick '10 normalization specs.
-    	'''
+        '''
+        This function splits the data into J-H-K bands and normalizes each band by its average.
+        It also normalizes a separate copy of the overall spectra to Kirkpatrick '10 normalization specs.
+        '''
 
         hdulist = fits.open(file_name)
         spectrum = hdulist[0]
@@ -77,9 +77,9 @@ class MakePlot:
 
     def __init__(self, file_name, type_number, NIR_standards): #This defines often reused variables
 
-    	'''
-    	This initializes all the variables necessary to make the on_key_press plots.
-    	'''
+        '''
+        This initializes all the variables necessary to make the on_key_press plots.
+        '''
 
         #Can define templates in each one! and can define all the pieces in each one and make multiple plot types :D
 
@@ -99,11 +99,11 @@ class MakePlot:
 
     def bracketed_plot(self, gravity_type): #This is for bracketed plots that are not first or last
 
-    '''
-    This creates the bracketed plots that pop up after key-press, as long as they are bracketed by L dwarfs.
-    '''
+        '''
+        This creates the bracketed plots that pop up after key-press, as long as they are bracketed by L dwarfs.
+        '''
 
-    #Create the Plots
+        #Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
             nrows=3, ncols=4, sharex=False, sharey=False, 
             gridspec_kw={'width_ratios':[1,1,1,3]}, facecolor='white'
@@ -120,7 +120,12 @@ class MakePlot:
                 axes2[jj, 0].fill_between(template_jband['col1'], template_jband['col4'], \
                                           template_jband['col5'], color='#c6c6c6')
                 axes2[jj, 0].plot(self.wavelength_J, self.flux_J, c='k')
-                axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                if gravity_type == 'f':
+                    axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                elif gravity_type == 'b':
+                    axes2[jj, 0].annotate(r'L{}$\beta$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                else:
+                    axes2[jj, 0].annotate(r'L{}$\gamma$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
                 axes2[jj, 0].set_ylim([-0.5, 2])
                 axes2[jj, 0].axis('off')
 
@@ -165,9 +170,9 @@ class MakePlot:
 
     def first_bracketed_plot(self, gravity_type): 
 
-    '''
-    This creates the bracketed plots for L0 at all gravities that pop up after key-press.
-    '''
+        '''
+        This creates the bracketed plots for L0 at all gravities that pop up after key-press.
+        '''
 
         #Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
@@ -210,7 +215,12 @@ class MakePlot:
                 axes2[jj, 0].fill_between(template_jband['col1'], template_jband['col4'], \
                                           template_jband['col5'], color='#c6c6c6')
                 axes2[jj, 0].plot(self.wavelength_J, self.flux_J, c='k')
-                axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                if gravity_type == 'f':
+                    axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                elif gravity_type == 'b':
+                    axes2[jj, 0].annotate(r'L{}$\beta$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                else:
+                    axes2[jj, 0].annotate(r'L{}$\gamma$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')                
                 axes2[jj, 0].set_ylim([-0.5, 2])
                 axes2[jj, 0].axis('off')
 
@@ -255,9 +265,9 @@ class MakePlot:
 
     def last_bracketed_plot(self, gravity_type):
 
-	    '''
-	    This creates the bracketed plots at all gravities that are final in their gravity and that pop up after key-press.
-	    '''
+        '''
+        This creates the bracketed plots at all gravities that are final in their gravity and that pop up after key-press.
+        '''
 
     	#Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
@@ -277,7 +287,12 @@ class MakePlot:
                 axes2[jj, 0].fill_between(template_jband['col1'], template_jband['col4'], \
                                           template_jband['col5'], color='#c6c6c6')
                 axes2[jj, 0].plot(self.wavelength_J, self.flux_J, c='k')
-                axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                if gravity_type == 'f':
+                    axes2[jj, 0].annotate('L{}'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                elif gravity_type == 'b':
+                    axes2[jj, 0].annotate(r'L{}$\beta$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
+                else:
+                    axes2[jj, 0].annotate(r'L{}$\gamma$'.format(ii), xy=(0.1, 0.8), xycoords='axes fraction', color='k')
                 axes2[jj, 0].set_ylim([-0.5, 2])
                 axes2[jj, 0].axis('off')
 
@@ -590,6 +605,11 @@ def typing_kit(file_name) :
             	                  gamma_NIR_standards)
 
             gamma_vars.last_bracketed_plot('g')
+
+
+        #Raise an error message if any other key is pressed
+        elif event.key in 'abcdefghijklmnopqrstuvwxyz`-=[];,.':
+            raise Exception('Invalid Key. Try any int in range(10) for field, ctrl + int in range(1) for beta, or alt + int in range(4) for gamma.')    
             
 
     ##==============

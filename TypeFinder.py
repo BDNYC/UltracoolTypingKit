@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pylab import *
+from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii
+from astropy.table import Table, Column
 
 class Data:
 
@@ -66,7 +68,7 @@ class Data:
         self.flux_J = flux_J
         self.wavelength_H = wavelength_H
         self.flux_H = flux_H
-        self. wavelength_K = wavelength_K
+        self.wavelength_K = wavelength_K
         self.flux_K = flux_K
         self.wavelength = wavelength
         self.norm_flux = norm_flux
@@ -375,12 +377,50 @@ def typing_kit(file_name) :
     templates of the overall NIR spectrum.
     '''
 
+
+    ##===============
+    #This defines the input spectrum data arrays
+    ##===============
+
+
     wavelength_J = Data(file_name).wavelength_J
     flux_J = Data(file_name).flux_J
     wavelength_H = Data(file_name).wavelength_H
     flux_H = Data(file_name).flux_H
     wavelength_K = Data(file_name).wavelength_K
     flux_K = Data(file_name).flux_K
+
+
+    ##===============
+    #This imports Cruz et al. 2017 templates into astropy tables
+    ##===============
+
+    #Beginning with the field templates. J-H-K bands are all diff lengths and so need their own table
+    field_templates = defaultdict(dict)
+
+    for band in ['J', 'H', 'K']:
+        for spectype in range(9):
+            band_data = ascii.read("templates/L{}{}_f.txt".format(spectype, band))
+            field_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                                                    names = ('wavelength', 'flux', 'upper', 'lower'))
+
+    #Next with beta templates
+    beta_templates = defaultdict(dict)
+
+    for band in ['J', 'H', 'K']:
+        for spectype in range(2):
+            band_data = ascii.read("templates/L{}{}_b.txt".format(spectype, band))
+            beta_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                                                   names = ('wavelength', 'flux', 'upper', 'lower'))
+
+    #Next with gamma templates
+    gamma_templates = defaultdict(dict)
+
+    for band in ['J', 'H', 'K']:
+        for spectype in range(5):
+            band_data = ascii.read("templates/L{}{}_g.txt".format(spectype, band))
+            gamma_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                                                    names = ('wavelength', 'flux', 'upper', 'lower'))
     
 
     ##===============
@@ -394,26 +434,26 @@ def typing_kit(file_name) :
     #Create the plots for alpha gravity
 
     for ii in range(9):
-    	template_jband = ascii.read("templates/L{}J_f.txt".format(ii))
-    	template_hband = ascii.read("templates/L{}H_f.txt".format(ii))
-    	template_kband = ascii.read("templates/L{}K_f.txt".format(ii))
 
 		##J Band
-    	axes1[ii, 0].plot(template_jband['col1'], template_jband['col2'], c='red')
-    	axes1[ii, 0].fill_between(template_jband['col1'], template_jband['col4'], template_jband['col5'], color='#c6c6c6')
+    	axes1[ii, 0].plot((field_templates['J'][ii])['wavelength'], (field_templates['J'][ii])['flux'], c='red')
+    	axes1[ii, 0].fill_between((field_templates['J'][ii])['wavelength'], (field_templates['J'][ii])['upper'], \
+                                  (field_templates['J'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 0].plot(wavelength_J, flux_J, c='k') #target object
     	axes1[ii, 0].annotate('L{}'.format(ii), xy=(0.1, 0.9), xycoords='axes fraction', color='k')
     	axes1[ii, 0].axis('off')
 
 		#H Band
-    	axes1[ii, 1].plot(template_hband['col1'], template_hband['col2'], c='red') 
-    	axes1[ii, 1].fill_between(template_hband['col1'], template_hband['col4'], template_hband['col5'], color='#c6c6c6') 
+    	axes1[ii, 1].plot((field_templates['H'][ii])['wavelength'], (field_templates['H'][ii])['flux'], c='red') 
+    	axes1[ii, 1].fill_between((field_templates['H'][ii])['wavelength'], (field_templates['H'][ii])['upper'], \
+                                  (field_templates['H'][ii])['lower'], color='#c6c6c6') 
     	axes1[ii, 1].plot(wavelength_H, flux_H, c='k') #target object
     	axes1[ii, 1].axis('off')
 
 		#K Band
-    	axes1[ii, 2].plot(template_kband['col1'], template_kband['col2'], c='red')
-    	axes1[ii, 2].fill_between(template_kband['col1'], template_kband['col4'], template_kband['col5'], color='#c6c6c6')
+    	axes1[ii, 2].plot((field_templates['K'][ii])['wavelength'], (field_templates['K'][ii])['flux'], c='red')
+    	axes1[ii, 2].fill_between((field_templates['K'][ii])['wavelength'], (field_templates['K'][ii])['upper'], \
+                                  (field_templates['K'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 2].plot(wavelength_K, flux_K, c='k') #target object
     	axes1[ii, 2].axis('off')
             
@@ -422,29 +462,25 @@ def typing_kit(file_name) :
             
     for ii in range(2):
 
-    	template_jband_beta = ascii.read("templates/L{}J_b.txt".format(ii))
-    	template_hband_beta = ascii.read("templates/L{}H_b.txt".format(ii))
-    	template_kband_beta = ascii.read("templates/L{}K_b.txt".format(ii))
-
 		##J Band
-    	axes1[ii, 3].plot(template_jband_beta['col1'], template_jband_beta['col2'], c='red')
-    	axes1[ii, 3].fill_between(template_jband_beta['col1'], template_jband_beta['col4'], \
-		                          template_jband_beta['col5'], color='#c6c6c6')
+    	axes1[ii, 3].plot((beta_templates['J'][ii])['wavelength'], (beta_templates['J'][ii])['flux'], c='red')
+    	axes1[ii, 3].fill_between((beta_templates['J'][ii])['wavelength'], (beta_templates['J'][ii])['upper'], \
+		                          (beta_templates['J'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 3].plot(wavelength_J, flux_J, c='k')
     	axes1[ii, 3].annotate(r'L{}$\beta$'.format(ii), xy=(0.1, 0.9), xycoords='axes fraction', color='k')
     	axes1[ii, 3].axis('off')
 
 		#H Band
-    	axes1[ii, 4].plot(template_hband_beta['col1'], template_hband_beta['col2'], c='red') 
-    	axes1[ii, 4].fill_between(template_hband_beta['col1'], template_hband_beta['col4'], \
-		                          template_hband_beta['col5'], color='#c6c6c6') 
+    	axes1[ii, 4].plot((beta_templates['H'][ii])['wavelength'], (beta_templates['H'][ii])['flux'], c='red') 
+    	axes1[ii, 4].fill_between((beta_templates['H'][ii])['wavelength'], (beta_templates['H'][ii])['upper'], \
+		                          (beta_templates['H'][ii])['lower'], color='#c6c6c6') 
     	axes1[ii, 4].plot(wavelength_H, flux_H, c='k')
     	axes1[ii, 4].axis('off')
 
 		#K Band
-    	axes1[ii, 5].plot(template_kband_beta['col1'], template_kband_beta['col2'], c='red')
-    	axes1[ii, 5].fill_between(template_kband_beta['col1'], template_kband_beta['col4'], \
-		                          template_kband_beta['col5'], color='#c6c6c6')
+    	axes1[ii, 5].plot((beta_templates['K'][ii])['wavelength'], (beta_templates['K'][ii])['flux'], c='red')
+    	axes1[ii, 5].fill_between((beta_templates['K'][ii])['wavelength'], (beta_templates['K'][ii])['upper'], \
+		                          (beta_templates['K'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 5].plot(wavelength_K, flux_K, c='k')
     	axes1[ii, 5].axis('off')
             
@@ -456,29 +492,25 @@ def typing_kit(file_name) :
             
     for ii in range(5):
 
-    	template_jband_gamma = ascii.read("templates/L{}J_g.txt".format(ii))
-    	template_hband_gamma = ascii.read("templates/L{}H_g.txt".format(ii))
-    	template_kband_gamma = ascii.read("templates/L{}K_g.txt".format(ii))
-
 		##J Band
-    	axes1[ii, 6].plot(template_jband_gamma['col1'], template_jband_gamma['col2'], c='red')
-    	axes1[ii, 6].fill_between(template_jband_gamma['col1'], template_jband_gamma['col4'], \
-		                          template_jband_gamma['col5'], color='#c6c6c6')
+    	axes1[ii, 6].plot((gamma_templates['J'][ii])['wavelength'], (gamma_templates['J'][ii])['flux'], c='red')
+    	axes1[ii, 6].fill_between((gamma_templates['J'][ii])['wavelength'], (gamma_templates['J'][ii])['upper'], \
+		                          (gamma_templates['J'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 6].plot(wavelength_J, flux_J, c='k')
     	axes1[ii, 6].annotate(r'L{}$\gamma$'.format(ii), xy=(0.1, 0.9), xycoords='axes fraction', color='k')
     	axes1[ii, 6].axis('off')
 
 		#H Band
-    	axes1[ii, 7].plot(template_hband_gamma['col1'], template_hband_gamma['col2'], c='red')
-    	axes1[ii, 7].fill_between(template_hband_gamma['col1'], template_hband_gamma['col4'], \
-		                          template_hband_gamma['col5'], color='#c6c6c6') 
+    	axes1[ii, 7].plot((gamma_templates['H'][ii])['wavelength'], (gamma_templates['H'][ii])['flux'], c='red')
+    	axes1[ii, 7].fill_between((gamma_templates['H'][ii])['wavelength'], (gamma_templates['H'][ii])['upper'], \
+		                          (gamma_templates['H'][ii])['lower'], color='#c6c6c6') 
     	axes1[ii, 7].plot(wavelength_H, flux_H, c='k')
     	axes1[ii, 7].axis('off')
 
 		#K Band
-    	axes1[ii, 8].plot(template_kband_gamma['col1'], template_kband_gamma['col2'], c='red')
-    	axes1[ii, 8].fill_between(template_kband_gamma['col1'], template_kband_gamma['col4'], \
-		                          template_kband_gamma['col5'], color='#c6c6c6')
+    	axes1[ii, 8].plot((gamma_templates['K'][ii])['wavelength'], (gamma_templates['K'][ii])['flux'], c='red')
+    	axes1[ii, 8].fill_between((gamma_templates['K'][ii])['wavelength'], (gamma_templates['K'][ii])['upper'], \
+		                          (gamma_templates['K'][ii])['lower'], color='#c6c6c6')
     	axes1[ii, 8].plot(wavelength_K, flux_K, c='k')
     	axes1[ii, 8].axis('off')
             

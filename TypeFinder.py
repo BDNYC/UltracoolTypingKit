@@ -145,11 +145,11 @@ class MakePlot:
         '''
 
         if gravity_type == 'f':
-            templates = Templates.field_templates
+            templates = Templates().field_templates
         elif gravity_type == 'b':
-            templates = Templates.beta_templates
+            templates = Templates().beta_templates
         elif gravity_type == 'g':
-            templates = Templates.gamma_templates
+            templates = Templates().gamma_templates
 
         #Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
@@ -219,11 +219,11 @@ class MakePlot:
         '''
 
         if gravity_type == 'f':
-            templates = Templates.field_templates
+            templates = Templates().field_templates
         elif gravity_type == 'b':
-            templates = Templates.beta_templates
+            templates = Templates().beta_templates
         elif gravity_type == 'g':
-            templates = Templates.gamma_templates
+            templates = Templates().gamma_templates
 
         #Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
@@ -317,11 +317,11 @@ class MakePlot:
         '''
 
         if gravity_type == 'f':
-            templates = Templates.field_templates
+            templates = Templates().field_templates
         elif gravity_type == 'b':
-            templates = Templates.beta_templates
+            templates = Templates().beta_templates
         elif gravity_type == 'g':
-            templates = Templates.gamma_templates
+            templates = Templates().gamma_templates
 
     	#Create the Plots
         fig2, axes2 = plt.subplots(figsize=(15,45),
@@ -431,9 +431,9 @@ def typing_kit(file_name) :
     ##===============
 
 
-    gamma_templates = Templates.gamma_templates
-    beta_templates = Templates.beta_templates
-    field_templates = Templates.field_templates
+    gamma_templates = Templates().gamma_templates
+    beta_templates = Templates().beta_templates
+    field_templates = Templates().field_templates
 
 
     ##===============

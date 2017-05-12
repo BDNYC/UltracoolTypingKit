@@ -14,9 +14,9 @@ class TestData(unittest.TestCase):
     	This tests that the J-H-K arrays have been sorted properly by checking their boundary conds.
     	'''
 
-        self.assertTrue([ii >= 0.87 and ii <= 1.39 for ii in self.data.wavelength_J])
-        self.assertTrue([ii >= 1.41 and ii <= 1.89 for ii in self.data.wavelength_H])
-        self.assertTrue([ii >= 1.91 and ii <= 2.39 for ii in self.data.wavelength_K])
+        self.assertTrue([wlength >= 0.87 and wlength <= 1.39 for wlength in self.data.wavelength_J])
+        self.assertTrue([wlength >= 1.41 and wlength <= 1.89 for wlength in self.data.wavelength_H])
+        self.assertTrue([wlength >= 1.91 and wlength <= 2.39 for wlength in self.data.wavelength_K])
 
 
 ### FUTURE TESTS ###

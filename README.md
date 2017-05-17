@@ -8,14 +8,14 @@ This code is written in Python 3.6, and does not yet have functionality for Pyth
 
 This code currently requires this directory tree to run properly:
 
-├── TypeFinder.py 
-├── new_types 
-│   ├── saves selected spectral type image here 
-├── spectra 
-│   ├── OPT 
-│   └── nir 
-│       └── store nir spectra here 
-└── templates 
+├── TypeFinder.py  
+├── new_types  
+│   ├── saves selected spectral type image here  
+├── spectra  
+│   ├── OPT  
+│   └── nir  
+│       └── store nir spectra here  
+└── templates  
 
 To run many spectra consecutively, the following wrapper can be helpful.
 It will print out the file name and wait for the user to press enter before continuing.
@@ -47,11 +47,13 @@ For example, for an L3 press:
 
 <kbd>3</kbd>
 
+
 To see a beta object, press the control key and the corresponding number. (Make sure to press control first)
 
 For example for an L1-beta press:
 
 <kbd>ctrl</kbd> + <kbd>1</kbd>
+
 
 To see a gamma object, press the alt key and the corresponding number. (Make sure to press alt first)
 

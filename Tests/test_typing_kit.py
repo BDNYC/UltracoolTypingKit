@@ -7,7 +7,7 @@ class TestData(unittest.TestCase):
     	'''
     	This defines data to test
     	'''
-        self.data = Data('some_test_file')
+        self.data = Data('test_L3.fits')
 
     def test_init(self):
     	'''

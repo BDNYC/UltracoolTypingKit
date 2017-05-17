@@ -43,22 +43,19 @@ The initial grid shows each spectral type band-by-band.
 To view a specific spectral type in more detail, key in the number you would like to see while your mouse is over the grid.
 To see a field object, press the corresponding spectral type number key on your keyboard.
 
-For example, for an L3 press:
-
+For example, for an L3 press:  
 <kbd>3</kbd>
 
 
 To see a beta object, press the control key and the corresponding number. (Make sure to press control first)
 
-For example for an L1-beta press:
-
+For example for an L1-beta press:  
 <kbd>ctrl</kbd> + <kbd>1</kbd>
 
 
 To see a gamma object, press the alt key and the corresponding number. (Make sure to press alt first)
 
-For example for an L2-gamma press:
-
+For example for an L2-gamma press:  
 <kbd>alt</kbd> + <kbd>1</kbd>
 
 After keying in your selection, a window centered on your spectral type will pop up:

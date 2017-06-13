@@ -12,11 +12,11 @@ This code currently requires this directory tree to run properly:
 ├── new_types  
 │   └── saves selected spectral type image here  
 ├── spectra    
-│   └── nir
-│       ├── store nir spectra here
-│       └── store full nir templates here  
-└── templates
-    └── store Cruz 2017 band-by-band templates here
+│   └── nir  
+│       ├── store nir spectra here  
+│       └── store full nir templates here    
+└── templates  
+    └── store Cruz 2017 band-by-band templates here  
 
 To run many spectra consecutively, the following wrapper can be helpful.
 It will print out the file name and wait for the user to press enter before continuing.

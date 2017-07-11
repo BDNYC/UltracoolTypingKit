@@ -36,7 +36,7 @@ for file in range(len(lines)):
 
 ```
    
-If you have the Cruz 2017 templates in ascii format, you can download the hdf5 from this repository.
+If you have the Cruz 2017 templates in ascii format, you can [download](.../blob/master/templates/Cruz2017_Templates.hdf5) the hdf5 file from this repository.
 You can also save an hdf5 file the first time you run Ultracool Typing Kit.
 
 ```python

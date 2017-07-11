@@ -52,7 +52,7 @@ By default make_templates is false, and this input will raise an exception if Cr
    
 
 ### 1. Running the Program
-On running, this initial window will pop up:
+On running, this initial window will pop up, after about 10 seconds:
 <img src="https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png" width="750">
 
 Your input spectra will be shown in black, over the Cruz et al. (2017) J-H-K band templates shown in red.

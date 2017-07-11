@@ -59,7 +59,6 @@ Your input spectra will be shown in black, over the Cruz et al. (2017) J-H-K ban
 The initial grid shows each spectral type band-by-band.
 
    
----
    
 
 ### 2. Selecting a Spectral Type
@@ -89,7 +88,6 @@ the entire NIR spectrum at once in the right-hand column, following the same col
 The templates used in for the entire NIR spectrum follow the templates specified in Cruz et al. (2017).
 
    
----
    
 
 ### 3. Saving Selected Spectral Type

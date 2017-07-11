@@ -33,12 +33,14 @@ for file in range(len(lines)):
 ```
 
 
+
 ### 1. Running the Program
 On running, this initial window will pop up:
 <img src="https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png" width="750">
 
 Your input spectra will be shown in black, over the Cruz et al. (2017) J-H-K band templates shown in red.
 The initial grid shows each spectral type band-by-band.
+
 
 
 ### 2. Selecting a Spectral Type
@@ -68,9 +70,11 @@ the entire NIR spectrum at once in the right-hand column, following the same col
 The templates used in for the entire NIR spectrum follow the templates specified in Cruz et al. (2017).
 
 
+
 ### 3. Saving Selected Spectral Type
 Currently the code automatically saves an image of your selection into the new_types folder. We are in the process 
 of updating it so that you can select whether you would prefer to save or see another type.
+
 
 
 ### Citation

@@ -1,13 +1,15 @@
 import unittest
 from TypeFinder import *
 
+TESTDATA_FILENAME = os.path.join(os.path.dirname(__file__), 'test_L3.fits')
+
 class TestData(unittest.TestCase):
 
     def setUp(self):
         '''
         This defines data to test
         '''
-        self.data = Data('test_L3.fits')
+        self.data = Data(TESTDATA_FILENAME)
 
     def test_init(self):
         '''

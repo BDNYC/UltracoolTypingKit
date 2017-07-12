@@ -10,13 +10,13 @@ This code currently requires this directory tree to run properly:
 
 ```
 ├── TypeFinder.py  
-├── new_types  
+├── new_types/  
 │   └── saves selected spectral type image here  
-├── spectra    
-│   └── nir  
+├── spectra/    
+│   └── nir/  
 │       ├── store NIR spectra here  
-│       └── store Kirkpatrick 10 NIR templates here    
-└── templates  
+│       └── store NIR spectral standards (Table 9, Cruz et al. 2017) here    
+└── templates/  
     └── store Cruz2017_Templates.hdf5 here  
  ```
 

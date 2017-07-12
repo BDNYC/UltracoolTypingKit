@@ -14,8 +14,8 @@ This code currently requires this directory tree to run properly:
 │   └── saves selected spectral type image here  
 ├── spectra    
 │   └── nir  
-│       ├── store nir spectra here  
-│       └── store full nir templates here    
+│       ├── store NIR spectra here  
+│       └── store Kirkpatrick 10 NIR templates here    
 └── templates  
     └── store Cruz2017_Templates.hdf5 here  
  ```

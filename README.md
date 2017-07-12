@@ -2,12 +2,9 @@
 Home for qualitative spectral typing GUI that follows the Cruz Method as proposed in <Cruz et al. (2017)>.
 Currently this GUI spectral types L field, L beta and L gamma brown dwarfs.
 This code is written in Python 3.6, and does not yet have functionality for Python 2.
-
-   
----
    
 
-### Usage
+## Usage
 
 This code currently requires this directory tree to run properly:
 
@@ -95,10 +92,8 @@ Currently the code automatically saves an image of your selection into the new_t
 of updating it so that you can select whether you would prefer to save or see another type.
 
    
----
-   
 
-### Citation
+## Citation
 Copyright 2017 Ellianna Schwab and collaborators
 
 If you make use of this code, please cite Cruz et al. (2017) and the zenodo DOI for the code, coming soon!

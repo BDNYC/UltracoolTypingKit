@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from pylab import *
+# from pylab import *
 from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii

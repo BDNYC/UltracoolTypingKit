@@ -10,7 +10,6 @@ script:
 
 install:
 - pip install matplotlib
-- pip install pylab
 - pip install collections
 - pip install astropy
 

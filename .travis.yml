@@ -10,7 +10,6 @@ script:
 
 install:
 - pip install matplotlib
-- pip install collections
 - pip install astropy
 
 matrix:

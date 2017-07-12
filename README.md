@@ -8,6 +8,7 @@ This code is written in Python 3.6, and does not yet have functionality for Pyth
 
 This code currently requires this directory tree to run properly:
 
+```
 ├── TypeFinder.py  
 ├── new_types  
 │   └── saves selected spectral type image here  
@@ -17,6 +18,7 @@ This code currently requires this directory tree to run properly:
 │       └── store full nir templates here    
 └── templates  
     └── store Cruz2017_Templates.hdf5 here  
+ ```
 
 To run many spectra consecutively, the following wrapper can be helpful.
 It will print out the file name and wait for the user to press enter before continuing.

@@ -1,4 +1,5 @@
 import unittest
+import os
 from TypeFinder import *
 
 TESTDATA_FILENAME = os.path.join(os.path.dirname(__file__), 'test_L3.fits')

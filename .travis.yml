@@ -8,6 +8,12 @@ python:
 script:
 - pytest
 
+install:
+- pip install matplotlib
+- pip install pylab
+- pip install collections
+- pip install astropy
+
 matrix:
   allow_failures:
     - python: 2.7.0

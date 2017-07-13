@@ -1,22 +1,25 @@
 import unittest
+import os
 from TypeFinder import *
 
-# class TestData(unittest.TestCase):
-#
-#     def setUp(self):
-#         '''
-#         This defines data to test
-#         '''
-#         self.data = Data('test_L3.fits')
-#
-#     def test_init(self):
-#         '''
-#         This tests that the J-H-K arrays have been sorted properly by checking their boundary conds.
-#         '''
-#
-#         self.assertTrue([0.87 <= wlength <= 1.39 for wlength in self.data.wavelength_J])
-#         self.assertTrue([1.41 <= wlength <= 1.89 for wlength in self.data.wavelength_H])
-#         self.assertTrue([1.91 <= wlength <= 2.39 for wlength in self.data.wavelength_K])
+TESTDATA_FILENAME = os.path.join(os.path.dirname(__file__), 'test_L3.fits')
+
+class TestData(unittest.TestCase):
+
+    def setUp(self):
+        '''
+        This defines data to test
+        '''
+        self.data = Data(TESTDATA_FILENAME)
+
+    def test_init(self):
+        '''
+        This tests that the J-H-K arrays have been sorted properly by checking their boundary conds.
+        '''
+
+        self.assertTrue([0.87 <= wlength <= 1.39 for wlength in self.data.wavelength_J])
+        self.assertTrue([1.41 <= wlength <= 1.89 for wlength in self.data.wavelength_H])
+        self.assertTrue([1.91 <= wlength <= 2.39 for wlength in self.data.wavelength_K])
 
 
 ### FUTURE TESTS ###

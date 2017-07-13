@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from pylab import *
+# from pylab import *
 from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii
@@ -87,27 +87,27 @@ class Templates:
 
         for band in ['J', 'H', 'K']:
             for spectype in range(9):
-                band_data = ascii.read("templates/L{}{}_f.txt".format(spectype, band))
-                field_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
-                                                        names = ('wavelength', 'flux', 'upper', 'lower'))
+                field_templates[band][spectype] = Table.read('templates/Cruz2017_Templates.hdf5', \
+                                                  path='field/L{}{}_template'.format(str(spectype), band))
+
 
         #Next with beta templates
         beta_templates = defaultdict(dict)
 
         for band in ['J', 'H', 'K']:
             for spectype in range(2):
-                band_data = ascii.read("templates/L{}{}_b.txt".format(spectype, band))
-                beta_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
-                                                       names = ('wavelength', 'flux', 'upper', 'lower'))
+                beta_templates[band][spectype]= Table.read('templates/Cruz2017_Templates.hdf5', \
+                                                path='beta/L{}{}_template'.format(str(spectype), band))
+
 
         #Next with gamma templates
         gamma_templates = defaultdict(dict)
 
         for band in ['J', 'H', 'K']:
             for spectype in range(5):
-                band_data = ascii.read("templates/L{}{}_g.txt".format(spectype, band))
-                gamma_templates[band][spectype] = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
-                                                        names = ('wavelength', 'flux', 'upper', 'lower'))
+                gamma_templates[band][spectype]= Table.read('templates/Cruz2017_Templates.hdf5', \
+                                                path='gamma/L{}{}_template'.format(str(spectype), band))
+
 
         self.gamma_templates = gamma_templates
         self.beta_templates = beta_templates
@@ -411,7 +411,7 @@ class MakePlot:
 
 
 ### Function definition
-def typing_kit(file_name) :
+def typing_kit(file_name, make_templates=False) :
 
     '''
     Ellianna Schwab, Kelle Cruz
@@ -424,6 +424,38 @@ def typing_kit(file_name) :
     number, '0' - '8'. Cruz et al. 2017 templates are shown band-by-band followed by Kirkpatrick 2010
     templates of the overall NIR spectrum.
     '''
+
+
+    ##===============
+    #Optional Section to Translate Templates to HDF5
+    ##===============
+
+    if make_templates == True:
+
+        #First for field templates
+        for band in ['J', 'H', 'K']:
+            for spectype in range(9):
+                band_data = ascii.read("templates/L{}{}_f.txt".format(spectype, band))
+                T = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                          names = ('wavelength', 'flux', 'upper', 'lower'))
+                T.write('templates/Cruz2017_Templates.hdf5', path='field/L{}{}_template'.format(str(spectype), band), append=True)
+
+        #Next with beta templates
+        for band in ['J', 'H', 'K']:
+            for spectype in range(2):
+                band_data = ascii.read("templates/L{}{}_b.txt".format(spectype, band))
+                T = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                          names = ('wavelength', 'flux', 'upper', 'lower'))
+                T.write('templates/Cruz2017_Templates.hdf5', path='beta/L{}{}_template'.format(str(spectype), band), append=True)
+
+        #Next with gamma templates
+        for band in ['J', 'H', 'K']:
+            for spectype in range(5):
+                band_data = ascii.read("templates/L{}{}_g.txt".format(spectype, band))
+                T = Table([band_data['col1'], band_data['col2'], band_data['col4'], band_data['col5']], \
+                          names = ('wavelength', 'flux', 'upper', 'lower'))
+                T.write('templates/Cruz2017_Templates.hdf5', path='gamma/L{}{}_template'.format(str(spectype), band), append=True)
+
 
 
     ##===============

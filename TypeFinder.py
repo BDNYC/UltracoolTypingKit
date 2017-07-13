@@ -1,10 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
-# from pylab import *
 from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table, Column
+
+'''
+Ellianna Schwab, Kelle Cruz
+
+TypeFinder.py contains typing_kit, which provides plots to qualitatively spectral type L-type brown dwarfs in NIR regime.
+Typing methods are taken from Cruz et al. 2017 and offer comparison to NIR spectral standards.
+
+To use input path to file_name in a string. A band-by-band grid of Cruz et al 2017 templates
+will be overplotted with the target spectrum. To compare to the NIR spectral standards as well, 
+key in the spectral type number, '0' - '8'. 
+Cruz et al. 2017 templates are shown band-by-band followed by a comparison to the overall NIR spectrum of NIR 
+spectral standards as defined in Table 9 of Cruz et al 2017.
+'''
 
 class Data:
 
@@ -189,7 +201,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[ii])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -287,7 +299,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[ii])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -362,7 +374,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[jj])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -417,17 +429,18 @@ def typing_kit(file_name, make_templates=False) :
     Ellianna Schwab, Kelle Cruz
 
     typing_kit provides plots to qualitatively spectral type L-type brown dwarfs in NIR regime.
-    Typing methods are taken from Cruz et al. 2017 and offer comparison to Kirkpatrick 2010 typing templates.
+    Typing methods are taken from Cruz et al. 2017 and offer comparison to NIR spectral standards.
 
     To use input path to file_name in a string. A band-by-band grid of Cruz et al 2017 templates
-    will be overplotted with the target spectrum. To compare to Kirkpatrick 2010, key in the spectral type
-    number, '0' - '8'. Cruz et al. 2017 templates are shown band-by-band followed by Kirkpatrick 2010
-    templates of the overall NIR spectrum.
+    will be overplotted with the target spectrum. To compare to the NIR spectral standards as well, 
+    key in the spectral type number, '0' - '8'. 
+    Cruz et al. 2017 templates are shown band-by-band followed by a comparison to the overall NIR spectrum of NIR 
+    spectral standards as defined in Table 9 of Cruz et al 2017.
     '''
 
 
     ##===============
-    #Optional Section to Translate Templates to HDF5
+    #If Necessary, Convert Ascii templates to HDF5
     ##===============
 
     if make_templates == True:

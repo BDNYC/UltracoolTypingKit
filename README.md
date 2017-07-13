@@ -1,7 +1,8 @@
 # UltracoolTypingKit
 Home for qualitative spectral typing GUI that follows the Cruz Method as proposed in <Cruz et al. (2017)>.
 Currently this GUI spectral types L field, L beta and L gamma brown dwarfs.
-This code is written in Python 3.6, and does not yet have functionality for Python 2.
+This code is written in Python 3.6, and does not yet have functionality for Python 2 and works with
+input fits files of NIR spectra.
    
 
 ## Usage
@@ -42,7 +43,7 @@ using the following method.
 
 ```python
 from TypeFinder import*
-typing_kit("spectra/nir/somespectra", make_templates=True)
+typing_kit("spectra/nir/spectra_file.fits", make_templates=True)
 
 ```
    

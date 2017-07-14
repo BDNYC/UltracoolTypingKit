@@ -10,6 +10,7 @@ input fits files of NIR spectra.
 This code currently requires this directory tree to run properly:
 
 ```
+UltracoolTypingKit/
 ├── TypeFinder.py  
 ├── new_types/  
 │   └── saves selected spectral type image here  

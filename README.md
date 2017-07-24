@@ -44,7 +44,7 @@ $ source activate UTK
    
    
 
-###1. Running UTK
+### 1. Running UTK
 
 UTK relies on an interactive backend and works best with `TkAgg`. ipython pylab uses this as its default.
 

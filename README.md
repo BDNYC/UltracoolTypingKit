@@ -34,11 +34,6 @@ UltracoolTypingKit/
 
 ## Usage
 
-   
-   
-
-###1. Running the Program
-
 UltracoolTypingKit (UTK) requires Python 3.5 to run properly. We recommend running in an environment to ensure usage of the correct version of Python and all the necessary modules.
 
 ```bash
@@ -46,6 +41,10 @@ $ conda create --name UTK python=3.5 ipython
 $ source activate UTK
 
 ``` 
+   
+   
+
+###1. Running UTK
 
 UTK relies on an interactive backend and works best with `TkAgg`. ipython pylab uses this as its default.
 

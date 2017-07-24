@@ -120,10 +120,17 @@ The templates used in for the entire NIR spectrum follow the templates specified
 
    
    
+### 3. Viewing Alternate Spectral Types
+If you keyed in a spectral type and you want to see a different one, press <kbd>q</kbd> to close the window containing your initial selection and to return to the initial grid window.
 
-### 3. Saving Selected Spectral Type
-Currently the code automatically saves an image of your selection into the new_types folder. We are in the process 
-of updating it so that you can select whether you would prefer to save or see another type.
+   
+   
+
+### 4. Saving a Spectral Type
+Once you have settled on a spectral type, you can save the image of the selected type by pressing <kbd>w</kbd>. This will save an image of the current plot view as a png with the name of your input spectrum file and your selected spectral type appended after an underscore, for example, like this for an L0: InputFileName_L0.png
+
+You can then close the selection window by pressing <kbd>q</kbd> and then the grid window by again pressing <kbd>q</kbd>.
+
 
    
 

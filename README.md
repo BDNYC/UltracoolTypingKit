@@ -23,7 +23,8 @@ UltracoolTypingKit/
 ├── TypeFinder.py  
 ├── new_types/  
 │   └── saves selected spectral type image here  
-├── spectra/    
+├── spectra/  
+│   ├── store T0 and M9 spectral standards here   
 │   └── nir/  
 │       ├── store NIR spectra here  
 │       └── store NIR spectral standards (Table 9, Cruz et al. 2017) here    

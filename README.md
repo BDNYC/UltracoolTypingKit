@@ -41,6 +41,12 @@ $ conda create --name UTK python=3.5 ipython
 $ source activate UTK
 
 ``` 
+
+Later, when you're done spectral typing, you'll want to exit this environment.
+```bash
+$ source deactivate
+
+```
    
    
 

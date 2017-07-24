@@ -5,6 +5,8 @@ from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table, Column
 
+plt.rcParams['keymap.save'] = ''
+
 '''
 Ellianna Schwab, Kelle Cruz
 
@@ -148,6 +150,7 @@ class MakePlot:
         #Define the other variables
         self.type_number = type_number
         self.NIR_standards = NIR_standards
+        self.file_name = file_name
 
 
     def bracketed_plot(self, gravity_type): #This is for bracketed plots that are not first or last
@@ -222,7 +225,15 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
+
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
+
 
     def first_bracketed_plot(self, gravity_type): 
 
@@ -320,7 +331,15 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
+
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
+
 
     def last_bracketed_plot(self, gravity_type):
 
@@ -417,10 +436,19 @@ class MakePlot:
         axes2[2, 3].plot(temp_wavelength, temp_norm_flux, c='red')
         axes2[2, 3].plot(self.wavelength, self.norm_flux, c='k')
         axes2[2, 3].axis('off')
-        
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
 
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
 
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
+
+def manipulate_figure(event):
+    if event.key == 'q':
+        plt.close(event.canvas.figure)
 
 ### Function definition
 def typing_kit(file_name, make_templates=False) :
@@ -711,7 +739,7 @@ def typing_kit(file_name, make_templates=False) :
 
 
         #Raise an error message if any other key is pressed
-        elif event.key in 'abcdefghijklmnopqrstuvwxyz`-=[];,.':
+        elif event.key in 'abcdefghijklmnoprstuvxyz`-=[];,.':
             raise Exception('Invalid Key. Try any int in range(10) for field, ctrl + int in range(1) for beta, or alt + int in range(4) for gamma.')    
             
 
@@ -723,3 +751,9 @@ def typing_kit(file_name, make_templates=False) :
     
     fig1.canvas.mpl_disconnect(fig1.canvas.manager.key_press_handler_id)
     fig1.canvas.mpl_connect('key_press_event', on_key_press) #This leaves it open to a second try
+
+    ##==============
+    #Close the plot via the keyboard
+    ##==============
+
+    fig1.canvas.mpl_connect('key_press_event', manipulate_figure)

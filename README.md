@@ -76,7 +76,7 @@ for file in range(len(lines)):
 ```
 
 After about 10 seconds, this initial window will pop up:
-<img src="https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png" width="750">
+<img src="https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/resources/opengrid.png" width="750">
 
 Your input spectra will be shown in black, over the Cruz et al. (2017) J-H-K band templates shown in red.
 The initial grid shows each spectral type band-by-band.
@@ -104,7 +104,7 @@ For example for an L2-gamma press:
 <kbd>alt</kbd> + <kbd>1</kbd>
 
 After keying in your selection, a window centered on your spectral type will pop up:
- ![Grid of Spectral Type Selection](https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/L3.png)
+ ![Grid of Spectral Type Selection](https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/resources/L3.png)
 
 This grid shows your selected spectral type bracketed by it's neighboring types, both band-by-band and across
 the entire NIR spectrum at once in the right-hand column, following the same color scheme as the initial grid. 

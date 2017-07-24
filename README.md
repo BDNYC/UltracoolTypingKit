@@ -5,7 +5,16 @@ This code is written in Python 3.6, and does not yet have functionality for Pyth
 input fits files of NIR spectra.
    
 
-## Usage
+## Installation
+
+To install clone this repository:
+
+```bash
+$ git clone https://github.com/BDNYC/UltracoolTypingKit
+$ cd UltracoolTypingKit/
+$ mkdir new_types
+
+```
 
 This code currently requires this directory tree to run properly:
 
@@ -22,6 +31,35 @@ UltracoolTypingKit/
     └── store Cruz2017_Templates.hdf5 here  
  ```
 
+
+## Usage
+
+
+###1. Running the Program
+
+UltracoolTypingKit (UTK) requires Python 3.5 to run properly. We recommend running in an environment to ensure usage of the correct version of Python and all the necessary modules.
+
+```bash
+$ conda create --name UTK python=3.5 ipython
+$ source activate UTK
+
+``` 
+
+UTK relies on an interactive backend and works best with `TkAgg`. ipython pylab uses this as its default.
+
+```bash
+$ipython --pylab
+
+```
+
+To run UTK on one spectrum, use the following input.
+
+```python
+from TypeFinder import *
+typing_kit("spectra/nir/spectra_file.fits")
+
+```
+
 To run many spectra consecutively, the following wrapper can be helpful.
 It will print out the file name and wait for the user to press enter before continuing.
 
@@ -36,26 +74,8 @@ for file in range(len(lines)):
    ...:     input("Press Enter to continue...")
 
 ```
-   
-If you have the Cruz 2017 templates in ascii format, you can [download](.../blob/master/templates/Cruz2017_Templates.hdf5) 
-the hdf5 file from this repository.
-You can also convert the ascii templates to an hdf5 file the first time you run Ultracool Typing Kit 
-using the following method.
 
-```python
-from TypeFinder import*
-typing_kit("spectra/nir/spectra_file.fits", make_templates=True)
-
-```
-   
-By default make_templates is false, and this input will raise an exception if Cruz2017_Templates.hdf5 already exists.
-
-   
----
-   
-
-### 1. Running the Program
-On running, this initial window will pop up, after about 10 seconds:
+After about 10 seconds, this initial window will pop up:
 <img src="https://raw.githubusercontent.com/elliesch/UltracoolTypingKit/master/opengrid.png" width="750">
 
 Your input spectra will be shown in black, over the Cruz et al. (2017) J-H-K band templates shown in red.
@@ -100,6 +120,6 @@ of updating it so that you can select whether you would prefer to save or see an
    
 
 ## Citation
-Copyright 2017 Ellianna Schwab and collaborators
+Copyright 2017 Ellianna Schwab, Kelle Cruz
 
 If you make use of this code, please cite Cruz et al. (2017) and the zenodo DOI for the code, coming soon!

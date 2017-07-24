@@ -48,7 +48,7 @@ $ source activate UTK
 UTK relies on an interactive backend and works best with `TkAgg`. ipython pylab uses this as its default.
 
 ```bash
-$ipython --pylab
+$ ipython --pylab
 
 ```
 

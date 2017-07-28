@@ -227,7 +227,7 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
 
         def save_figure(event):
             if event.key == 'w':
@@ -334,7 +334,7 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
 
         def save_figure(event):
             if event.key == 'w':
@@ -441,7 +441,7 @@ class MakePlot:
         axes2[2, 3].plot(self.wavelength, self.norm_flux, c='k')
         axes2[2, 3].axis('off')
 
-        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number)
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
 
         def save_figure(event):
             if event.key == 'w':

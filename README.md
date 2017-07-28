@@ -127,7 +127,9 @@ If you keyed in a spectral type and you want to see a different one, press <kbd>
    
 
 ### 4. Saving a Spectral Type
-Once you have settled on a spectral type, you can save the image of the selected type by pressing <kbd>w</kbd>. This will save an image of the current plot view as a png with the name of your input spectrum file and your selected spectral type appended after an underscore, for example, like this for an L0: InputFileName_L0.png
+Once you have settled on a spectral type, you can save the image of the selected type by pressing <kbd>w</kbd>. This will create a csv file in the folder new_types/ that will save your input file name in column 1 and your selected spectral type in column 2. The csv file is named XX-XX-XXXX_SpecTypes.csv, XX represents today's date in day-month-year format. As you spectral type more objects, they will append as new rows to the csv file.
+
+Pressing <kbd>w</kbd> will also save an image of the current plot view as a .png to the new_types/ folder with the name of your input spectrum file and your selected spectral type appended after an underscore, for example, like this for an L0: InputFileName_L0.png
 
 You can then close the selection window by pressing <kbd>q</kbd> and then the grid window by again pressing <kbd>q</kbd>.
 

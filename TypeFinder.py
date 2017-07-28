@@ -4,6 +4,8 @@ from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table, Column
+import os
+import time
 
 plt.rcParams['keymap.save'] = ''
 
@@ -230,6 +232,7 @@ class MakePlot:
         def save_figure(event):
             if event.key == 'w':
                 plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
 
         fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
         fig2.canvas.mpl_connect('key_press_event', save_figure)
@@ -336,6 +339,7 @@ class MakePlot:
         def save_figure(event):
             if event.key == 'w':
                 plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
 
         fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
         fig2.canvas.mpl_connect('key_press_event', save_figure)
@@ -442,11 +446,39 @@ class MakePlot:
         def save_figure(event):
             if event.key == 'w':
                 plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
 
         fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
         fig2.canvas.mpl_connect('key_press_event', save_figure)
 
+
+def save_types(file_name, type_number, gravity_type):
+
+    '''
+    saves output csv file with filename in column 1, and spectral type in column 2
+    '''
+
+    now_date = time.strftime("%d-%m-%Y")
+
+    if os.path.isfile(r'new_types/{}_SpecTypes.csv'.format(now_date)) == True :
+        f = open(r'new_types/{}_SpecTypes.csv'.format(now_date), 'a')
+        f.write(r'{}, L{}{}'.format(file_name[12:], type_number, gravity_type))
+        f.write('\n')
+        f.close()
+
+    else :
+        f = open(r'new_types/{}_SpecTypes.csv'.format(now_date), 'w')
+        f.write(r'{}, L{}{}'.format(file_name[12:], type_number, gravity_type))
+        f.write('\n')        
+        f.close()
+
+
 def manipulate_figure(event):
+
+    '''
+    closes selected plot window when q is pressed on the keyboard
+    '''
+
     if event.key == 'q':
         plt.close(event.canvas.figure)
 

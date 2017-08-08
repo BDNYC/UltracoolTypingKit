@@ -13,6 +13,7 @@ To install clone this repository:
 $ git clone https://github.com/BDNYC/UltracoolTypingKit
 $ cd UltracoolTypingKit/
 $ mkdir new_types
+$ pip install -r requirements.txt
 
 ```
 

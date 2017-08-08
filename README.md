@@ -13,9 +13,17 @@ To install clone this repository:
 $ git clone https://github.com/BDNYC/UltracoolTypingKit
 $ cd UltracoolTypingKit/
 $ mkdir new_types
-$ pip install -r requirements.txt
 
 ```
+
+UltracoolTypingKit (UTK) requires Python 3.5 to run properly. We recommend running in an environment to ensure usage of the correct version of Python and all the necessary modules.
+
+```bash
+$ conda create --name UTK python=3.5 ipython
+$ source activate UTK
+$ pip install -r requirements.txt
+
+``` 
 
 This code currently requires this directory tree to run properly:
 
@@ -35,24 +43,14 @@ UltracoolTypingKit/
 
 
 ## Usage
-
-UltracoolTypingKit (UTK) requires Python 3.5 to run properly. We recommend running in an environment to ensure usage of the correct version of Python and all the necessary modules.
-
-```bash
-$ conda create --name UTK python=3.5 ipython
-$ source activate UTK
-
-``` 
-
-Later, when you're done spectral typing, you'll want to exit this environment.
-```bash
-$ source deactivate
-
-```
-   
    
 
 ### 1. Running UTK
+
+If you aren't already in the UTK environment, activate UTK.
+```bash
+$ source activate UTK
+```
 
 UTK relies on an interactive backend and works best with `TkAgg`. ipython pylab uses this as its default.
 

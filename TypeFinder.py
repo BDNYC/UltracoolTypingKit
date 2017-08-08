@@ -1,10 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
-# from pylab import *
 from collections import defaultdict
 from astropy.io import fits
 from astropy.io import ascii
 from astropy.table import Table, Column
+import os
+import time
+
+plt.rcParams['keymap.save'] = ''
+
+'''
+Ellianna Schwab, Kelle Cruz
+
+TypeFinder.py contains typing_kit, which provides plots to qualitatively spectral type L-type brown dwarfs in NIR regime.
+Typing methods are taken from Cruz et al. 2017 and offer comparison to NIR spectral standards.
+
+To use input path to file_name in a string. A band-by-band grid of Cruz et al 2017 templates
+will be overplotted with the target spectrum. To compare to the NIR spectral standards as well, 
+key in the spectral type number, '0' - '8'. 
+Cruz et al. 2017 templates are shown band-by-band followed by a comparison to the overall NIR spectrum of NIR 
+spectral standards as defined in Table 9 of Cruz et al 2017.
+'''
 
 class Data:
 
@@ -136,6 +152,7 @@ class MakePlot:
         #Define the other variables
         self.type_number = type_number
         self.NIR_standards = NIR_standards
+        self.file_name = file_name
 
 
     def bracketed_plot(self, gravity_type): #This is for bracketed plots that are not first or last
@@ -189,7 +206,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[ii])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -210,7 +227,16 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
+
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
+
 
     def first_bracketed_plot(self, gravity_type): 
 
@@ -287,7 +313,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[ii])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -308,7 +334,16 @@ class MakePlot:
                 axes2[jj, 3].plot(self.wavelength, self.norm_flux, c='k')
                 axes2[jj, 3].axis('off')
                 
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
+
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
+
 
     def last_bracketed_plot(self, gravity_type):
 
@@ -362,7 +397,7 @@ class MakePlot:
                 axes2[jj, 2].axis('off')
 
 
-                #All Together Now! This is where the Kirkpatrick 10 one comes in.
+                #All Together Now! This is where the spectral standard comes in.
                 temp_hdulist = fits.open(self.NIR_standards[jj])
                 temp_spectrum = temp_hdulist[0]
                 temp_wavelength = temp_spectrum.data[0]
@@ -405,10 +440,47 @@ class MakePlot:
         axes2[2, 3].plot(temp_wavelength, temp_norm_flux, c='red')
         axes2[2, 3].plot(self.wavelength, self.norm_flux, c='k')
         axes2[2, 3].axis('off')
-        
-        # fig2.savefig('new_types/' + self.file_name[12:-5] + r'_L{}'.format(self.type_number))
+
+        save_name = 'new_types/' + self.file_name[12:-5] + r'_L{}{}'.format(self.type_number, gravity_type)
+
+        def save_figure(event):
+            if event.key == 'w':
+                plt.savefig(save_name)
+                save_types(self.file_name, self.type_number, gravity_type)
+
+        fig2.canvas.mpl_connect('key_press_event', manipulate_figure)
+        fig2.canvas.mpl_connect('key_press_event', save_figure)
 
 
+def save_types(file_name, type_number, gravity_type):
+
+    '''
+    saves output csv file with filename in column 1, and spectral type in column 2
+    '''
+
+    now_date = time.strftime("%d-%m-%Y")
+
+    if os.path.isfile(r'new_types/{}_SpecTypes.csv'.format(now_date)) == True :
+        f = open(r'new_types/{}_SpecTypes.csv'.format(now_date), 'a')
+        f.write(r'{}, L{}{}'.format(file_name[12:], type_number, gravity_type))
+        f.write('\n')
+        f.close()
+
+    else :
+        f = open(r'new_types/{}_SpecTypes.csv'.format(now_date), 'w')
+        f.write(r'{}, L{}{}'.format(file_name[12:], type_number, gravity_type))
+        f.write('\n')        
+        f.close()
+
+
+def manipulate_figure(event):
+
+    '''
+    closes selected plot window when q is pressed on the keyboard
+    '''
+
+    if event.key == 'q':
+        plt.close(event.canvas.figure)
 
 ### Function definition
 def typing_kit(file_name, make_templates=False) :
@@ -417,17 +489,18 @@ def typing_kit(file_name, make_templates=False) :
     Ellianna Schwab, Kelle Cruz
 
     typing_kit provides plots to qualitatively spectral type L-type brown dwarfs in NIR regime.
-    Typing methods are taken from Cruz et al. 2017 and offer comparison to Kirkpatrick 2010 typing templates.
+    Typing methods are taken from Cruz et al. 2017 and offer comparison to NIR spectral standards.
 
     To use input path to file_name in a string. A band-by-band grid of Cruz et al 2017 templates
-    will be overplotted with the target spectrum. To compare to Kirkpatrick 2010, key in the spectral type
-    number, '0' - '8'. Cruz et al. 2017 templates are shown band-by-band followed by Kirkpatrick 2010
-    templates of the overall NIR spectrum.
+    will be overplotted with the target spectrum. To compare to the NIR spectral standards as well, 
+    key in the spectral type number, '0' - '8'. 
+    Cruz et al. 2017 templates are shown band-by-band followed by a comparison to the overall NIR spectrum of NIR 
+    spectral standards as defined in Table 9 of Cruz et al 2017.
     '''
 
 
     ##===============
-    #Optional Section to Translate Templates to HDF5
+    #If Necessary, Convert Ascii templates to HDF5
     ##===============
 
     if make_templates == True:
@@ -698,7 +771,7 @@ def typing_kit(file_name, make_templates=False) :
 
 
         #Raise an error message if any other key is pressed
-        elif event.key in 'abcdefghijklmnopqrstuvwxyz`-=[];,.':
+        elif event.key in 'abcdefghijklmnoprstuvxyz`-=[];,.':
             raise Exception('Invalid Key. Try any int in range(10) for field, ctrl + int in range(1) for beta, or alt + int in range(4) for gamma.')    
             
 
@@ -710,3 +783,9 @@ def typing_kit(file_name, make_templates=False) :
     
     fig1.canvas.mpl_disconnect(fig1.canvas.manager.key_press_handler_id)
     fig1.canvas.mpl_connect('key_press_event', on_key_press) #This leaves it open to a second try
+
+    ##==============
+    #Close the plot via the keyboard
+    ##==============
+
+    fig1.canvas.mpl_connect('key_press_event', manipulate_figure)

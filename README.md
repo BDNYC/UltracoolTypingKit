@@ -139,6 +139,6 @@ You can then close the selection window by pressing <kbd>q</kbd> and then the gr
    
 
 ## Citation
-Copyright 2017 Ellianna Schwab, Kelle Cruz
+Copyright 2017 Ellianna Abrahams, Kelle Cruz
 
 If you make use of this code, please cite Cruz et al. (2017) and the zenodo DOI for the code, [![DOI](https://zenodo.org/badge/84575091.svg)](https://zenodo.org/badge/latestdoi/84575091)
